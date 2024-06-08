@@ -25,20 +25,6 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': 'true'}.items()
     )
 
-    # joystick = IncludeLaunchDescription(
-    #             PythonLaunchDescriptionSource([os.path.join(
-    #                 get_package_share_directory(package_name),'launch','joystick.launch.py'
-    #             )]), launch_arguments={'use_sim_time': 'true'}.items()
-    # )
-
-    # twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
-    # twist_mux = Node(
-    #         package="twist_mux",
-    #         executable="twist_mux",
-    #         parameters=[twist_mux_params, {'use_sim_time': True}],
-    #         remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
-    #     )
-
     gazebo_params_file = os.path.join(get_package_share_directory(package_name),'config','gazebo_params.yaml')
     slam_toolbox_params_file = os.path.join(get_package_share_directory(package_name),'config','mapper_params_online_async.yaml')
 
@@ -73,14 +59,6 @@ def generate_launch_description():
                     get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')]),
                     launch_arguments={'use_sim_time': 'true','slam_params_file':slam_toolbox_params_file}.items()
              )
-
-
-    nav_two = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','nav_two_launch.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
-    )
-    
     
     
     # Code for delaying a node (I haven't tested how effective it is)
@@ -104,12 +82,9 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
         rsp,
-        # joystick,
-        # twist_mux,
         gazebo,
         spawn_entity,
         diff_drive_spawner,
         joint_broad_spawner,
         slam_toolbox
-        # nav_two
     ])
