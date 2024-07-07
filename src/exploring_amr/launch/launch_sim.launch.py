@@ -54,11 +54,11 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
-    slam_toolbox = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')]),
-                    launch_arguments={'use_sim_time': 'true','slam_params_file':slam_toolbox_params_file}.items()
-             )
+    # slam_toolbox = IncludeLaunchDescription(
+    #             PythonLaunchDescriptionSource([os.path.join(
+    #                 get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')]),
+    #                 launch_arguments={'use_sim_time': 'true','slam_params_file':slam_toolbox_params_file}.items()
+    #          )
     
     
     # Code for delaying a node (I haven't tested how effective it is)
@@ -85,6 +85,6 @@ def generate_launch_description():
         gazebo,
         spawn_entity,
         diff_drive_spawner,
-        joint_broad_spawner,
-        slam_toolbox
+        joint_broad_spawner
+        # slam_toolbox
     ])
